@@ -175,7 +175,7 @@ The following constraints are enforced at the database level (implemented in lat
 
 ---
 
-## 2. 📊 Semester GPA Report
+## 2. Semester GPA Report
 
 **Number of Pipelines:** 6 stages
 
@@ -189,7 +189,7 @@ The following constraints are enforced at the database level (implemented in lat
 
 ---
 
-## 3. 📚 Course Statistics
+## 3. Course Statistics
 
 **Number of Pipelines:** 4 stages
 
@@ -202,7 +202,7 @@ The following constraints are enforced at the database level (implemented in lat
 
 ---
 
-## 4. 🏆 Top Performing Students
+## 4. Top Performing Students
 
 **Number of Pipelines:** 6 stages
 
