@@ -161,7 +161,7 @@ The following constraints are enforced at the database level (implemented in lat
 
 #  Aggregation Pipelines Documentation
 
-## 1. 🎓 Student Transcript
+## 1. Student Transcript
 
 **Number of Pipelines:** 5 stages
 
