@@ -155,3 +155,63 @@ The following constraints are enforced at the database level (implemented in lat
 - Embedding is used where data is tightly coupled.
 - Referencing is used for shared and reusable entities.
 - The design supports efficient **CRUD operations** and **aggregation pipelines** such as GPA calculation and transcript generation.
+  
+---
+
+
+#  Aggregation Pipelines Documentation
+
+## 1. 🎓 Student Transcript
+
+**Number of Pipelines:** 5 stages
+
+**What Each Pipeline Does:**
+
+* `$lookup` → Join `students` collection to get student info.
+* `$lookup` → Join `courses` collection to get course details.
+* `$lookup` → Join `semesters` collection to get semester info.
+* `$group` → Nest grades under each course, then courses under each semester, then semesters under each student.
+* `$project` → Shape the final output: student → semesters → courses → grades.
+
+---
+
+## 2. 📊 Semester GPA Report
+
+**Number of Pipelines:** 6 stages
+
+**What Each Pipeline Does:**
+
+* `$lookup` → Join `students` collection for student info.
+* `$lookup` → Join `courses` collection for course credits.
+* `$lookup` → Join `semesters` collection for semester info.
+* `$group` → Calculate weighted grade points (`total × credits`) and sum credits per student per semester.
+* `$project` → Compute GPA = totalPoints ÷ totalCredits.
+
+---
+
+## 3. 📚 Course Statistics
+
+**Number of Pipelines:** 4 stages
+
+**What Each Pipeline Does:**
+
+* `$lookup` → Join `courses` collection to get course details.
+* `$unwind` → Flatten the course array.
+* `$group` → Count number of students enrolled and calculate average grade per course.
+* `$project` → Output course code, name, department, number of students, and average grade.
+
+---
+
+## 4. 🏆 Top Performing Students
+
+**Number of Pipelines:** 6 stages
+
+**What Each Pipeline Does:**
+
+* `$lookup` → Join `students` collection for student info.
+* `$lookup` → Join `courses` collection for course credits.
+* `$group` → Calculate total grade points and total credits per student.
+* `$project` → Compute GPA for student.
+* `$sort` → Rank students by GPA (descending).
+* `$limit` → Return top N students.
+
